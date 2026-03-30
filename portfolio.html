@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vihaan Gupta — Robotics Engineer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ─────────────────────────────────────────────────────── */
+:root {
+  --bg:        #080c10;
+  --bg2:       #0d1117;
+  --surface:   #111820;
+  --surface2:  #182030;
+  --border:    #1e2d3d;
+  --accent:    #00e5ff;
+  --accent2:   #39ff14;
+  --accent3:   #ff6b35;
+  --text:      #cdd9e5;
+  --text-dim:  #637089;
+  --text-head: #f0f6fc;
+  --mono:      'Space Mono', monospace;
+  --sans:      'Outfit', sans-serif;
+  --radius:    6px;
+  --glow:      0 0 20px rgba(0,229,255,.18);
+}
+
+/* ── RESET ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── GRID TEXTURE ────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* ── LAYOUT ──────────────────────────────────────────────────────── */
+.page-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,12,16,.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: .8rem;
+  color: var(--accent);
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--text-dim); }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  letter-spacing: .05em;
+  transition: color .2s, background .2s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+  background: rgba(0,229,255,.07);
+}
+
+/* ── HERO ────────────────────────────────────────────────────────── */
+.hero {
+  padding: 110px 28px 80px;
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--accent);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--sans);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  color: var(--text-head);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  max-width: 500px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--accent);
+  border: 1px solid rgba(0,229,255,.3);
+  padding: 4px 10px;
+  border-radius: 3px;
+  letter-spacing: .06em;
+  background: rgba(0,229,255,.04);
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--mono);
+  font-size: .75rem;
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  letter-spacing: .06em;
+  transition: all .2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  background: #33eeff;
+  box-shadow: var(--glow);
+}
+
+.btn-outline {
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0,229,255,.05);
+}
+
+/* Hero avatar */
+.hero-avatar-wrap {
+  position: relative;
+  width: 400px;
+  flex-shrink: 0;
+}
+
+.hero-avatar-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 1px solid rgba(0,229,255,.25);
+  border-radius: 14px;
+  animation: pulse-border 3s ease-in-out infinite;
+}
+
+@keyframes pulse-border {
+  0%, 100% { opacity: .25; }
+  50% { opacity: .7; }
+}
+
+.hero-avatar-wrap img {
+  width: 400px;
+  height: 440px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  filter: grayscale(20%) contrast(1.05);
+}
+
+.hero-avatar-placeholder {
+  width: 400px;
+  height: 440px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-avatar-placeholder svg { opacity: .3; }
+.hero-avatar-placeholder span {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--text-dim);
+  letter-spacing: .08em;
+}
+
+/* ── SECTION CHROME ──────────────────────────────────────────────── */
+section { padding: 70px 0; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--accent);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 1.55rem;
+  color: var(--text-head);
+  letter-spacing: -.02em;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 380px;
+}
+
+/* ── ABOUT ───────────────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.about-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  transition: border-color .2s;
+}
+
+.about-block:hover { border-color: rgba(0,229,255,.3); }
+
+.about-block.wide {
+  grid-column: span 2;
+}
+
+.about-block p {
+  font-size: .93rem;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.about-block p + p { margin-top: 12px; }
+
+.stat-number {
+  font-family: var(--mono);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: .78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* ── SKILLS ──────────────────────────────────────────────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.skill-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-family: var(--mono);
+  font-size: .73rem;
+  color: var(--text);
+  letter-spacing: .04em;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-chip::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent2);
+  flex-shrink: 0;
+}
+
+.skill-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0,229,255,.05);
+  transform: translateY(-1px);
+}
+
+/* ── ACHIEVEMENTS ────────────────────────────────────────────────── */
+.achievements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.achievement-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .25s, transform .2s;
+}
+
+.achievement-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.achievement-card.orange::before {
+  background: linear-gradient(90deg, var(--accent3), transparent);
+}
+
+.achievement-card:hover {
+  border-color: rgba(0,229,255,.35);
+  transform: translateY(-2px);
+}
+
+.achievement-card.orange:hover { border-color: rgba(255,107,53,.35); }
+
+.ach-badge {
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.ach-badge.cyan { background: rgba(0,229,255,.12); color: var(--accent); border: 1px solid rgba(0,229,255,.2); }
+.ach-badge.orange { background: rgba(255,107,53,.12); color: var(--accent3); border: 1px solid rgba(255,107,53,.2); }
+
+.achievement-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-head);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.achievement-card p {
+  font-size: .88rem;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.ach-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ach-list li {
+  font-size: .85rem;
+  color: var(--text);
+  padding-left: 16px;
+  position: relative;
+}
+
+.ach-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: .8rem;
+}
+
+.ach-list.orange li::before { color: var(--accent3); }
+
+.ach-note {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: rgba(0,229,255,.04);
+  border-left: 2px solid var(--accent);
+  font-size: .8rem;
+  color: var(--text-dim);
+  border-radius: 0 4px 4px 0;
+}
+
+.ach-note.orange {
+  background: rgba(255,107,53,.04);
+  border-color: var(--accent3);
+}
+
+.ach-images {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.ach-images img {
+  width: 90px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 5px;
+  filter: grayscale(20%);
+  border: 1px solid var(--border);
+  transition: filter .2s, border-color .2s;
+}
+
+.ach-images img:hover { filter: none; border-color: var(--accent); }
+
+/* ── PROJECTS ────────────────────────────────────────────────────── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color .2s, transform .2s;
+}
+
+.project-card:hover {
+  border-color: rgba(0,229,255,.3);
+  transform: translateY(-2px);
+}
+
+.project-card h3 {
+  font-size: .98rem;
+  font-weight: 600;
+  color: var(--text-head);
+  line-height: 1.3;
+}
+
+.project-ws {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--text-dim);
+  letter-spacing: .04em;
+}
+
+.project-card p {
+  font-size: .86rem;
+  color: var(--text-dim);
+  flex: 1;
+}
+
+.project-link {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: .04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  transition: gap .2s;
+}
+
+.project-link:hover { gap: 9px; }
+
+/* ── CERTS ───────────────────────────────────────────────────────── */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color .2s, transform .2s;
+}
+
+.cert-card:hover {
+  border-color: rgba(0,229,255,.3);
+  transform: translateY(-2px);
+}
+
+.cert-img-wrap {
+  height: 140px;
+  overflow: hidden;
+  background: var(--surface2);
+}
+
+.cert-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(15%);
+  transition: filter .2s, transform .3s;
+}
+
+.cert-card:hover .cert-img-wrap img { filter: none; transform: scale(1.03); }
+
+.cert-body {
+  padding: 14px 16px;
+}
+
+.cert-body p {
+  font-size: .83rem;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+
+/* ── INITIAL PROJECTS ────────────────────────────────────────────── */
+.repo-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  transition: border-color .2s;
+}
+
+.repo-card:hover { border-color: rgba(0,229,255,.3); }
+
+.repo-card p {
+  font-size: .9rem;
+  color: var(--text-dim);
+  max-width: 600px;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 48px 28px;
+  margin-top: 20px;
+}
+
+.footer-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-left .name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-head);
+  margin-bottom: 4px;
+}
+
+.footer-left .contact {
+  font-family: var(--mono);
+  font-size: .95rem;
+  color: var(--text);
+  line-height: 2;
+}
+
+.footer-links {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  letter-spacing: .04em;
+  transition: all .2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  border-color: rgba(0,229,255,.35);
+  background: rgba(0,229,255,.05);
+}
+
+/* ── DIVIDER ─────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+/* ── FADE IN ANIMATION ───────────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp .55s ease forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in:nth-child(1) { animation-delay: .05s; }
+.fade-in:nth-child(2) { animation-delay: .12s; }
+.fade-in:nth-child(3) { animation-delay: .19s; }
+.fade-in:nth-child(4) { animation-delay: .26s; }
+.fade-in:nth-child(5) { animation-delay: .33s; }
+.fade-in:nth-child(6) { animation-delay: .40s; }
+
+/* ── HARDWARE ────────────────────────────────────────────────────── */
+.hardware-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.hw-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 18px;
+  transition: border-color .2s, transform .2s;
+}
+
+.hw-card:hover {
+  border-color: rgba(0,229,255,.35);
+  transform: translateY(-2px);
+}
+
+.hw-icon {
+  color: var(--accent);
+  margin-bottom: 12px;
+  opacity: .85;
+}
+
+.hw-name {
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--text-head);
+}
+
+/* ── CURRENTLY WORKING ON ────────────────────────────────────────── */
+.current-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.current-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color .2s, transform .2s;
+  position: relative;
+}
+
+.current-card:hover {
+  border-color: rgba(0,229,255,.3);
+  transform: translateY(-2px);
+}
+
+.current-card.highlight {
+  border-color: rgba(57,255,20,.25);
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(57,255,20,.04) 100%);
+}
+
+.current-card.highlight:hover {
+  border-color: rgba(57,255,20,.5);
+}
+
+.current-icon {
+  color: var(--accent);
+  opacity: .8;
+}
+
+.current-card.highlight .current-icon {
+  color: var(--accent2);
+}
+
+.current-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-head);
+  line-height: 1.3;
+}
+
+.current-card p {
+  font-size: .88rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.current-wip-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .1em;
+  color: var(--accent2);
+  background: rgba(57,255,20,.1);
+  border: 1px solid rgba(57,255,20,.25);
+  padding: 4px 10px;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+/* ── LIGHTBOX ────────────────────────────────────────────────────── */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0,0,0,.88);
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.active { display: flex; }
+
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 88vh;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 60px rgba(0,229,255,.15);
+  cursor: default;
+  animation: lbIn .2s ease;
+}
+
+@keyframes lbIn {
+  from { opacity: 0; transform: scale(.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 26px;
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  line-height: 1;
+  transition: color .15s;
+}
+
+.lightbox-close:hover { color: var(--accent); }
+
+/* Make achievement images feel clickable */
+.ach-images img { cursor: zoom-in; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 60px;
+  }
+  .hero-avatar-wrap { display: none; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-block.wide { grid-column: span 1; }
+  .achievements { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .hardware-grid { grid-template-columns: repeat(2, 1fr); }
+  .current-grid { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .repo-card { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+
+<body>
+<div class="page-wrap">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">VG<span>_robotics</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#hardware">Hardware</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#projects">Projects</a>
+      <a href="#current">Working On</a>
+      <a href="#certs">Certifications</a>
+      <a href="index.html">Resume</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Robotics Software Engineer</p>
+    <h1>Vihaan<br><span>Gupta</span></h1>
+    <p class="hero-subtitle">
+      Building autonomous systems at the intersection of manipulation, perception, and real-time control. IIITDM Kancheepuram · B.Tech CSE, Year 2.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">ROS2</span>
+      <span class="tag">MoveIt2</span>
+      <span class="tag">Manipulation</span>
+      <span class="tag">Perception</span>
+      <span class="tag">Jetson AGX Orin</span>
+      <span class="tag">C++ / Python</span>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://github.com/Vihaan30g" target="_blank">GitHub</a>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/vihaan-gupta-ab046836b" target="_blank">LinkedIn</a>
+      <a class="btn btn-outline" href="index.html">Resume ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-avatar-wrap">
+    <img src="images/me.jpg" alt="Vihaan Gupta"
+         onerror="this.parentElement.innerHTML='<div class=\'hero-avatar-placeholder\'><svg width=\'48\' height=\'48\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'#00e5ff\' stroke-width=\'1.2\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M4 20c0-4 3.6-7 8-7s8 3 8 7\'/></svg><span>me.jpg</span></div>'">
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">// profile</p>
+    <h2 class="section-title">About Me</h2>
+
+    <div class="about-grid">
+      <div class="about-block" style="grid-column: 1 / -1;">
+        <p>
+          I'm a robotics software enthusiast currently pursuing a B.Tech in Computer Science and Engineering at IIITDM Kancheepuram. In my second year, I'm deeply involved in hands-on robotics development through competitive team activities and academic research.
+        </p>
+        <p>
+          My core interests lie in robotic manipulation, perception pipelines, motion planning, and real-time system integration using ROS2. I have practical experience with LiDAR and depth cameras, implementing Cartesian control via MoveIt2 Servo, and developing software tightly coupled with hardware systems such as the Jetson AGX Orin.
+        </p>
+        <p>
+          I believe great robotics engineering lives at the boundary between clean abstraction and messy hardware — and I enjoy operating in exactly that space.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">// technical stack</p>
+    <h2 class="section-title">Skills</h2>
+
+    <div class="skills-grid">
+      <div class="skill-chip">C / C++</div>
+      <div class="skill-chip">Python</div>
+      <div class="skill-chip">ROS2</div>
+      <div class="skill-chip">MoveIt2</div>
+      <div class="skill-chip">RViz</div>
+      <div class="skill-chip">Gazebo</div>
+      <div class="skill-chip">OpenCV</div>
+      <div class="skill-chip">YOLO</div>
+      <div class="skill-chip">Data Structures & Algo</div>
+      <div class="skill-chip">OOP</div>
+      <div class="skill-chip">Cartesian Control</div>
+      <div class="skill-chip">Isaac Sim</div>
+      <div class="skill-chip">HTML / CSS / JS</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HARDWARE -->
+<section id="hardware">
+  <div class="container">
+    <p class="section-label">// hardware</p>
+    <h2 class="section-title">Hardware Experience</h2>
+
+    <div class="hardware-grid">
+      <div class="hw-card">
+        <div class="hw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="hw-name">Jetson AGX Orin</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="hw-name">IMU</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="hw-name">Encoders</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M7 7V5a5 5 0 0 1 10 0v2"/></svg>
+        </div>
+        <div class="hw-name">ZED 2i</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 8h.01M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z"/><circle cx="9" cy="13" r="3"/></svg>
+        </div>
+        <div class="hw-name">Intel RealSense</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+        </div>
+        <div class="hw-name">Microcontrollers</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8M12 8v8"/></svg>
+        </div>
+        <div class="hw-name">Arduino</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="12" cy="12" r="4"/><path d="M12 6v2M12 16v2M6 12h2M16 12h2"/></svg>
+        </div>
+        <div class="hw-name">Raspberry Pi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <p class="section-label">// competitions</p>
+    <h2 class="section-title">Achievements</h2>
+
+    <div class="achievements">
+
+      <!-- IRC -->
+      <div class="achievement-card">
+        <span class="ach-badge cyan">IRC 2026 · Global Rank 10</span>
+        <h3>International Rover Challenge</h3>
+        <p>Competed as part of Team Shunya (MaRS Club) — placed 10th globally among 33 finalist teams.</p>
+        <ul class="ach-list">
+          <li>Developed Cartesian control pipeline for a 5-DOF manipulator</li>
+          <li>Implemented YOLO-based object detection for task execution</li>
+          <li>Worked with RealSense camera, IMUs, encoders & Jetson AGX Orin</li>
+          <li>Contributed to perception, navigation, and full system integration</li>
+        </ul>
+        <div class="ach-note">Real-world robotics demands tight coupling of perception, planning, and control under strict constraints.</div>
+        <div class="ach-images">
+          <img src="images/irc1.jpg" alt="IRC 1">
+          <img src="images/irc2.jpg" alt="IRC 2">
+          <img src="images/irc3.jpg" alt="IRC 3">
+          <img src="images/irc4.jpg" alt="IRC 4">
+        </div>
+      </div>
+
+      <!-- Caterpillar -->
+      <div class="achievement-card orange">
+        <span class="ach-badge orange">CAT Challenge 2026 · Best Innovation</span>
+        <h3>Caterpillar Autonomy Challenge</h3>
+        <p>Won Best Innovation Award at IIT Madras for an autonomous excavation system developed with MaRS Club.</p>
+        <ul class="ach-list orange">
+          <li>Designed control strategies for a 5-DOF manipulator</li>
+          <li>Implemented trajectory planning for excavation & berm construction</li>
+          <li>Integrated SLAM and navigation pipelines</li>
+          <li>Interfaced RealSense camera for real-time perception</li>
+        </ul>
+        <div class="ach-note orange">System-level thinking and robustness are non-negotiable in autonomous field robotics.</div>
+        <div class="ach-images">
+          <img src="images/cat1.jpg" alt="CAT 1">
+          <img src="images/cat2.jpg" alt="CAT 2">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">// workspaces</p>
+    <h2 class="section-title">Manipulator Projects</h2>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <h3>Autonomous Excavation Pipeline</h3>
+        <span class="project-ws">ws_caterpillar_auto_final</span>
+        <p>Manipulator system for autonomous sand scooping and berm construction. Full trajectory planning integrated with perception.</p>
+        <a class="project-link" href="https://github.com/Vihaan30g/robotics-projects1/tree/main/ws_caterpillar_auto_final" target="_blank">View Workspace →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Goal Pose Motion Planning</h3>
+        <span class="project-ws">ws_goalpose_moveit</span>
+        <p>Motion planning to a specified end-effector pose using MoveIt2's planning framework and OMPL planners.</p>
+        <a class="project-link" href="https://github.com/Vihaan30g/robotics-projects1/tree/main/ws_goalpose_moveit" target="_blank">View Workspace →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>2-DOF Cartesian Control</h3>
+        <span class="project-ws">ws_IRC_2dof_cartesian</span>
+        <p>Real-time Cartesian control of a 2-DOF arm using MoveIt2 Servo — low-latency command streaming.</p>
+        <a class="project-link" href="https://github.com/Vihaan30g/robotics-projects1/tree/main/ws_IRC_2dof_cartesian" target="_blank">View Workspace →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>5-DOF Cartesian Manipulator Control</h3>
+        <span class="project-ws">ws_IRC_5dof_cartesian</span>
+        <p>Full manipulator Cartesian control pipeline using real-time velocity commands via MoveIt2 Servo.</p>
+        <a class="project-link" href="https://github.com/Vihaan30g/robotics-projects1/tree/main/ws_IRC_5dof_cartesian" target="_blank">View Workspace →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Collision-Free Path Planning</h3>
+        <span class="project-ws">ws_moveit_pathplan</span>
+        <p>Obstacle-aware motion planning and avoidance using MoveIt2 with configurable collision environments.</p>
+        <a class="project-link" href="https://github.com/Vihaan30g/robotics-projects1/tree/main/ws_moveit_pathplan" target="_blank">View Workspace →</a>
+      </div>
+
+      <div class="project-card" style="border-color: rgba(57,255,20,.2);">
+        <h3>ROS2 Learning Repository</h3>
+        <span class="project-ws">ros2-notes</span>
+        <p>Foundation workspace from early ROS2 studies — covers OpenCV integration, YOLO experiments, and LiDAR data handling.</p>
+        <a class="project-link" href="https://github.com/Vihaan30g/ros2-notes" target="_blank" style="color:var(--accent2);">View Repository →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="container">
+    <p class="section-label">// credentials</p>
+    <h2 class="section-title">Certifications</h2>
+
+    <div class="certs-grid">
+
+      <div class="cert-card">
+        <div class="cert-img-wrap">
+          <img src="images/cert1.jpg" alt="ML Certificate"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="cert-body">
+          <p>Supervised Machine Learning: Regression and Classification</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-img-wrap">
+          <img src="images/cert2.jpg" alt="Techfest Certificate"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="cert-body">
+          <p>Ujjwal Bharat — Techfest IIT Bombay</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-img-wrap">
+          <img src="images/cert3.jpg" alt="Python Certificate"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="cert-body">
+          <p>The Complete Python Bootcamp From Zero to Hero in Python</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CURRENTLY WORKING ON -->
+<section id="current">
+  <div class="container">
+    <p class="section-label">// in progress</p>
+    <h2 class="section-title">Currently Working On</h2>
+
+    <div class="current-grid">
+
+      <div class="current-card">
+        <div class="current-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>AI / ML & Computer Vision</h3>
+        <p>Going deeper into machine learning fundamentals and advanced computer vision techniques — with a focus on applying them to real robotics perception problems.</p>
+      </div>
+
+      <div class="current-card">
+        <div class="current-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+        </div>
+        <h3>Advanced Manipulation Algorithms</h3>
+        <p>Studying state-of-the-art algorithms for robotic manipulation — optimizing motion planning, control strategies, and arm performance for real-world tasks.</p>
+      </div>
+
+      <div class="current-card highlight">
+        <div class="current-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Pick & Place Pipeline — From Scratch</h3>
+        <p>Building a complete pick and place system end-to-end: designing and fabricating our own robotic arm, integrating perception, planning, and control into a unified autonomous pipeline.</p>
+        <span class="current-wip-badge">🔧 Active Build</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="name">Vihaan Gupta</div>
+      <div class="contact">
+        Vihaan30g@gmail.com<br>
+        +91 9399929308
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/Vihaan30g" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/vihaan-gupta-ab046836b" target="_blank">LinkedIn</a>
+      <a href="index.html">Resume</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /page-wrap -->
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox">
+  <span class="lightbox-close" id="lbClose">✕</span>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<!-- Intersection observer for scroll fade-ins + lightbox -->
+<script>
+// Scroll fade-ins
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.style.opacity = '1';
+      el.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.achievement-card, .project-card, .cert-card, .skill-chip, .about-block, .hw-card, .current-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = 'opacity .45s ease, transform .45s ease, border-color .2s';
+  observer.observe(el);
+});
+
+// Lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbClose = document.getElementById('lbClose');
+
+document.querySelectorAll('.ach-images img').forEach(img => {
+  img.addEventListener('click', () => {
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lb.classList.add('active');
+  });
+});
+
+lb.addEventListener('click', (e) => {
+  if (e.target === lb || e.target === lbClose) {
+    lb.classList.remove('active');
+    lbImg.src = '';
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    lb.classList.remove('active');
+    lbImg.src = '';
+  }
+});
+</script>
+
+</body>
+</html>

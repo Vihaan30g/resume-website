@@ -1,135 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Vihaan Gupta | Robotics Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Vihaan Gupta | Resume</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f1f5f9;
+    color: #111;
+}
+
+/* CENTER CARD */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+/* HEADER */
+.header {
+    position: relative;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.header p {
+    margin: 2px 0;
+}
+
+/* LINKS */
+.links {
+    margin-top: 8px;
+}
+
+.links a {
+    margin-right: 12px;
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+/* DOWNLOAD BUTTON */
+.download-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.download-btn a {
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 14px;
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+    color: #2563eb;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.download-btn a:hover {
+    background: #2563eb;
+    color: white;
+}
+
+/* SECTIONS */
+.section {
+    margin-top: 28px;
+}
+
+.section h2 {
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* LIST */
+ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .download-btn {
+        position: static;
+        margin-top: 10px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<header class="header">
-    <h1>Vihaan Gupta</h1>
-    <h2>
-        Indian Institute of Information Technology Design & Manufacturing Kancheepuram<br>
-        Mars Rover Students Club, IIITD&M Kancheepuram
-    </h2>
+<div class="container">
 
-    <div class="social-links">
-        <a href="https://github.com/vihaan30g" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/vihaan-gupta-ab046836b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
-           target="_blank">LinkedIn</a>
-        <a href="mailto:Vihaan30g@gmail.com">Email</a>
+<!-- HEADER -->
+<div class="header">
+
+    <!-- DOWNLOAD BUTTON -->
+    <div class="download-btn">
+        <a href="resume_vihaan.pdf" download>
+            Download PDF
+        </a>
     </div>
 
-    <nav class="nav-links">
-        <a href="certificates.html">Certificates</a>
-        <a href="projects.html">Projects</a>
-    </nav>
-</header>
+    <h1>Vihaan Gupta</h1>
+    <p>IIITDM Kancheepuram, India</p>
+    <p>Vihaan30g@gmail.com — +91 9399929308</p>
 
-<main class="container">
+    <div class="links">
+        <a href="https://github.com/Vihaan30g" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/vihaan-gupta-ab046836b" target="_blank">LinkedIn</a>
+        <a href="portfolio.html">Portfolio</a>
+    </div>
+</div>
 
-    <!-- ABOUT -->
-    <section class="card">
-        <h3>About Me</h3>
-        <p>
-            I am a robotics software enthusiast currently pursuing a Bachelor of Technology in
-            Computer Science and Engineering at the Indian Institute of Information Technology
-            Design & Manufacturing Kancheepuram (IIITDMK). I am presently in my second year and
-            actively involved in hands-on robotics development through academic projects and
-            competitive team activities.
-        </p>
+<!-- SUMMARY -->
+<div class="section">
+    <h2>Summary</h2>
+    <p>
+        Robotics software developer focused on manipulation and perception systems, with hands-on experience in ROS2 and computer vision. Currently pursuing B.Tech in Computer Science at IIITDM Kancheepuram and actively contributing to competitive robotics projects.
+    </p>
+</div>
 
-        <p>
-            My technical interests include robotic manipulation, perception pipelines, motion
-            planning, and real-time system integration using ROS2. I have practical experience
-            working with sensors such as LiDAR and cameras, implementing Cartesian control using
-            MoveIt2 Servo, and developing software that interfaces closely with hardware systems.
-            I enjoy building reliable robotic systems and continuously strengthening my foundation
-            in algorithms, mathematics, and applied engineering.
-        </p>
-    </section>
+<!-- SKILLS -->
+<div class="section">
+    <h2>Skills</h2>
+    <p><b>Languages:</b> C++, Python</p>
+    <p><b>Robotics & Simulation:</b> ROS2, Gazebo, RViz, Isaac Sim, MoveIt2</p>
+    <p><b>Perception:</b> OpenCV, YOLO, Image Processing</p>
+    <p><b>Core CS:</b> Data Structures & Algorithms, OOP</p>
+</div>
 
-    <!-- SKILLS -->
-    <section class="card">
-        <h3>Skills</h3>
-        <ul>
-            <li>C / C++</li>
-            <li>Python</li>
-            <li>ROS2, RViz, Gazebo</li>
-            <l1>MoveIt2</li>
-            <li>OpenCV, YOLO (basics)</li>
-            <li>Data Structures & Algorithms</li>
-            <li>Object-Oriented Programming</li>
-            <li>Frontend Web Development (HTML, CSS, JavaScript)</li>
-        </ul>
-    </section>
+<!-- EXPERIENCE -->
+<div class="section">
+    <h2>Experience & Projects</h2>
+    <ul>
+        <li>Implemented a Cartesian control pipeline for a 5-DOF manipulator using MoveIt2, including hardware interface, microcontroller communication, and trajectory execution.</li>
+        <li>Developed perception pipelines using camera and LiDAR data, including depth-based processing for extracting positions of objects identified using YOLO models.</li>
+        <li>Trained and deployed a YOLOv8-based object detection model for outdoor cone detection in autonomous rover tasks.</li>
+        <li>Worked on system integration and real-time debugging across perception, control, and navigation subsystems during field testing.</li>
+        <li>Collaborated with the navigation team working on autonomous driving pipeline development.</li>
+        <li>Currently developing a full-stack autonomous manipulation system for pick-and-place in unknown environments.</li>
+    </ul>
+</div>
 
-    <!-- EXPERIENCE -->
-    <section class="card">
-        <h3>Experience</h3>
-        <ul>
-            <li>Worked with LiDAR and camera data for point cloud processing and vision-based perception.</li>
-            <li>Implemented Cartesian control pipelines using MoveIt2 and MoveIt Servo.</li>
-            <li>Developed manipulation workflows involving both software control and hardware integration.</li>
-            <li>Hands-on experience with YOLO-based object detection pipelines.</li>
-            <li>Team member at MaRS; participated in the Caterpillar Autonomy Challenge 2025.</li>
-            <li>Participated in multiple Techfest innovation challenges hosted by IIT Bombay; ranked among the top 25 teams nationwide in two competitions.</li>
-            <li>Practical exposure to real-time debugging, system integration, and field testing.</li>
-        </ul>
-    </section>
+<!-- COMPETITIONS -->
+<div class="section">
+    <h2>Competitions & Achievements</h2>
+    <ul>
+        <li>Secured 10th rank globally in International Rover Challenge (IRC), 2026.</li>
+        <li>Awarded Best Innovation Award at Caterpillar Autonomy Challenge, IIT Madras.</li>
+        <li>Ranked in top 25 nationwide in 2 innovation challenges at Techfest IIT Bombay.</li>
+        <li>Currently participating in European Rover Challenge (ERC).</li>
+    </ul>
+</div>
 
-    <!-- EDUCATION -->
-    <section class="card">
-        <h3>Education</h3>
+<!-- EDUCATION -->
+<div class="section">
+    <h2>Education</h2>
 
-        <table style="width:100%; border-collapse: collapse;">
-            <tr>
-                <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Degree / Level</th>
-                <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Institution</th>
-                <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Year / Status</th>
-            </tr>
+    <p><b>B.Tech in Computer Science and Engineering</b><br>
+    IIITDM Kancheepuram — 2024 – Present</p>
 
-            <tr>
-                <td style="padding:8px;">B.Tech in Computer Science and Engineering</td>
-                <td style="padding:8px;">IIITDM Kancheepuram</td>
-                <td style="padding:8px;">Currently Pursuing (2nd Year)</td>
-            </tr>
+    <p><b>Class XII (PCM)</b><br>
+    St. Joseph’s Co-ed School, Bhopal — 2024</p>
+</div>
 
-            <tr>
-                <td style="padding:8px;">Class 12 (PCM)</td>
-                <td style="padding:8px;">St. Joseph’s Co-ed School, Bhopal</td>
-                <td style="padding:8px;">Completed in 2024</td>
-            </tr>
+<!-- LANGUAGES -->
+<div class="section">
+    <h2>Languages</h2>
+    <p>English, Hindi</p>
+</div>
 
-            <tr>
-                <td style="padding:8px;">Class 1–10</td>
-                <td style="padding:8px;">St. Joseph’s Co-ed School, Bhopal</td>
-                <td style="padding:8px;">Completed</td>
-            </tr>
-        </table>
+</div>
 
-    </section>
-
-    <!-- LANGUAGES -->
-    <section class="card">
-        <h3>Languages</h3>
-        <p>English</p>
-        <p>Hindi</p>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="card">
-        <h3>Contact</h3>
-        <p>Phone: 9399929308</p>
-        <p>Email: Vihaan30g@gmail.com</p>
-    </section>
-
-</main>
-
-<script src="js/main.js"></script>
 </body>
 </html>
