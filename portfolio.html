@@ -1288,12 +1288,15 @@ document.querySelectorAll('.achievement-card, .project-card, .cert-card, .skill-
   observer.observe(el);
 });
 
-// Lightbox
+// LIGHTBOX (FIXED FOR CERTIFICATES ALSO)
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
 const lbClose = document.getElementById('lbClose');
 
-document.querySelectorAll('.ach-images img').forEach(img => {
+// FIX: includes certificates images too
+document.querySelectorAll('.ach-images img, .cert-img-wrap img').forEach(img => {
+  img.style.cursor = 'zoom-in'; // UX improvement
+
   img.addEventListener('click', () => {
     lbImg.src = img.src;
     lbImg.alt = img.alt;
@@ -1301,6 +1304,7 @@ document.querySelectorAll('.ach-images img').forEach(img => {
   });
 });
 
+// Close logic
 lb.addEventListener('click', (e) => {
   if (e.target === lb || e.target === lbClose) {
     lb.classList.remove('active');
@@ -1308,6 +1312,7 @@ lb.addEventListener('click', (e) => {
   }
 });
 
+// ESC key close
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     lb.classList.remove('active');
